@@ -1,0 +1,28 @@
+
+
+body {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/7a/Cave_mouth_of_belum_caves.jpg");
+    background-size:cover;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 4px 4px 4px rgba(255, 255, 255, .4);
+}
+
+img {
+    height: 250px;
+}
+
+#rupee {
+    margin-top: 15%;
+    text-align: center;
+}
+
+.rupeeImage {
+    padding-right: 5%;
+}
+
+.rupeeImage:last-child {
+    padding-right: 0;
+}
