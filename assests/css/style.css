@@ -7,6 +7,8 @@ body {
 
 h1 {
     text-align: center;
+    color: aliceblue;
+    font-size: 1.5em;   
     text-shadow: 4px 4px 4px rgba(255, 255, 255, .4);
 }
 
@@ -15,7 +17,7 @@ img {
 }
 
 #rupee {
-    margin-top: 15%;
+    margin-top: 12%;
     text-align: center;
 }
 

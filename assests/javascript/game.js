@@ -1,36 +1,112 @@
-var counter = 0;
-var spacing = $("<div>");
-var targetNumber = 53;
 
-$("#number-to-guess").text(targetNumber);
+    var wins = 0;
+    var losses = 0;
+    var targetNumber = [];
+    var counter = 0;
 
-var rupeeValue = [10, 5, 3, 7];
-for (var i = 0; i < rupeeValue.length; i++) {
+    $("#number-to-guess").text(targetNumber);
+    $("#counter").text(counter);
+    $("#wins").text(wins);
+    $("#losses").text(losses);
 
-  var imageRupee = $("<img>");
 
-  imageRupee.addClass("rupeeImage");
+    function getRupeeValues() {
+      var rupeeValues = [];
+      for(var i = 0; i < 4; i++) {
+          var rupeePoint = Math.floor(Math.random() * 25) + 1;
+          rupeeValues.push(rupeePoint);
 
-  imageRupee.attr("src", "assests/+images/GreenRupee.png");
+          var imageRupee = $("<img>");
+          imageRupee.addClass("rupeeImage");
+          imageRupee.attr("src", "assests/images/GreenRupee.png");
+          imageRupee.attr("data-rupeeValue", rupeeValues[i]);
+          console.log()
+          $("#rupee").append(imageRupee);
+      }
+      console.log(rupeeValues + " inside");
+      return rupeePoint;
+  }
+  
+  var rupeePoint = getRupeeValues();
+  console.log()
 
-  imageRupee.attr("data-crystalvalue", rupeeValue[i]);
+  
 
-  $("#rupee").append(imageRupee);
+  function possNum() {
+    
+    var randIndex1 = Math.floor(Math.random() * rupeePoint.length);
+    var randIndex2 = Math.floor(Math.random() * rupeePoint.length);
+    var targetValue = rupeePoint[randIndex1] + rupeePoint[randIndex2];
+
+    return rupeePoint;
+  }
+
+  var targetNumber = possNum();
+
+
+  
+console.log(targetNumber);
+
+
+   
+
+$("#rupee").on("click", ".rupeeImage", function match() {
+  var rupeePoint = ($(this).attr("data-rupeeValue"));
+  counter += parseInt(rupeePoint);
+  console.log(rupeePoint);
+  document.getElementById("counter").innerHTML = counter;
+  //console.log(counter);
+
+    if (counter === targetNumber) {
+      alert("You win!");
+      wins = wins + 1;
+      resetVariables();
+      startGame();
+  
+    }
+  
+    else if (counter >= targetNumber) {
+      alert("You lose!!");
+      losses = losses + 1;
+      resetVariables();
+      startGame();
+    }
+
+    //function to show wins
+function showWins() { 
+$("#wins").text(wins);
 }
 
-$(".rupeeImage").on("click", function() {
+//function to show losses
 
-  var rupeePoint = ($(this).attr("data-crystalvalue"));
-  rupeePoint = parseInt(rupeePoint);
-  counter += rupeePoint;
-  alert("New score: " + counter);
+function showLosses() { 
+$("#losses").text(losses);
+}
 
-  if (counter === targetNumber) {
-    alert("You win!");
-  }
 
-  else if (counter >= targetNumber) {
-    alert("You lose!!");
-  }
+function resetVariables() {
+ counter = 0;
+  $("#counter").text(counter);
+  // clear image tags and then call getRupeeValue ()
+  // OR separate the image generation and the number allocation in 2 fncts and then only call the numberGen function to fill in the new numbers
+$("#rupee").empty();
+rupeePoint = getRupeeValues();
 
-});
+
+}
+
+function startGame() {
+  showWins();
+  showLosses();
+}
+
+
+startGame();
+
+  
+
+})
+
+
+
+
