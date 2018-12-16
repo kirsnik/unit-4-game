@@ -1,54 +1,71 @@
+var targetNumber = [];
+var wins = 0;
+var losses = 0;
+var counter = 0;
+$("#counter").text(counter);
+$("#wins").text(wins);
+$("#losses").text(losses);
+$("#targetNumber").text(targetNumber);
 
-    var wins = 0;
-    var losses = 0;
-    var targetNumber = [];
-    var counter = 0;
+function getRupeeValues() {
+  var rupeeValues = [];
+  for (var i = 0; i < 4; i++) {
+    var rupeePoint = Math.floor(Math.random() * 25) + 5;
+    (rupeeValues).push(rupeePoint);
+    console.log(rupeePoint + " second")
 
-    $("#number-to-guess").text(targetNumber);
-    $("#counter").text(counter);
-    $("#wins").text(wins);
-    $("#losses").text(losses);
+    var imageRupee = $("<img>");
+    imageRupee.addClass("rupeeImage");
+    imageRupee.attr("src", "assests/images/GreenRupee.png");
+    imageRupee.attr("data-rupeeValue", rupeeValues[i]);
+    console.log()
+    $("#rupee").append(imageRupee);
+    console.log(rupeeValues + " inside randVal");
 
 
-    function getRupeeValues() {
-      var rupeeValues = [];
-      for(var i = 0; i < 4; i++) {
-          var rupeePoint = Math.floor(Math.random() * 25) + 1;
-          rupeeValues.push(rupeePoint);
-
-          var imageRupee = $("<img>");
-          imageRupee.addClass("rupeeImage");
-          imageRupee.attr("src", "assests/images/GreenRupee.png");
-          imageRupee.attr("data-rupeeValue", rupeeValues[i]);
-          console.log()
-          $("#rupee").append(imageRupee);
-      }
-      console.log(rupeeValues + " inside");
-      return rupeePoint;
   }
-  
-  var rupeePoint = getRupeeValues();
-  console.log()
+  return rupeePoint;
+}
 
-  
+var rupeePoint = getRupeeValues();{
+  var randIndex1 = rupeePoint;
+  var randIndex2 = rupeePoint;
+}
 
-  function possNum() {
-    
-    var randIndex1 = Math.floor(Math.random() * rupeePoint.length);
-    var randIndex2 = Math.floor(Math.random() * rupeePoint.length);
-    var targetValue = rupeePoint[randIndex1] + rupeePoint[randIndex2];
 
-    return rupeePoint;
+function randVal(){
+  var targetNumber = [];{
+      var possnumb = +randIndex1 + +randIndex2;
+      targetNumber.push(possnumb);
+      console.log(targetNumber + " under randval");
+
+    }
+    console.log(randIndex1 + "ran1");
+    console.log(randIndex2 + "ran2");
+    return targetNumber;
   }
 
-  var targetNumber = possNum();
-
-
   
-console.log(targetNumber);
 
 
-   
+targetNumber = randVal();
+console.log(targetNumber + " outside");
+  
+$("#targetNumber").text(targetNumber);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#rupee").on("click", ".rupeeImage", function match() {
   var rupeePoint = ($(this).attr("data-rupeeValue"));
@@ -57,56 +74,53 @@ $("#rupee").on("click", ".rupeeImage", function match() {
   document.getElementById("counter").innerHTML = counter;
   //console.log(counter);
 
-    if (counter === targetNumber) {
-      alert("You win!");
-      wins = wins + 1;
-      resetVariables();
-      startGame();
-  
-    }
-  
-    else if (counter >= targetNumber) {
-      alert("You lose!!");
-      losses = losses + 1;
-      resetVariables();
-      startGame();
-    }
+  if (counter == targetNumber) {
+    alert("You win!");
+    wins = wins + 1;
+    resetVariables();
+    startGame();
 
-    //function to show wins
-function showWins() { 
-$("#wins").text(wins);
-}
+  } else if (counter >= targetNumber) {
+    alert("You lose!!");
+    losses = losses + 1;
+    resetVariables();
+    startGame();
+  }
 
-//function to show losses
+  //function to show wins
+  function showWins() {
+    $("#wins").text(wins);
+  }
 
-function showLosses() { 
-$("#losses").text(losses);
-}
+  //function to show losses
+
+  function showLosses() {
+    $("#losses").text(losses);
+  }
 
 
-function resetVariables() {
- counter = 0;
-  $("#counter").text(counter);
-  // clear image tags and then call getRupeeValue ()
-  // OR separate the image generation and the number allocation in 2 fncts and then only call the numberGen function to fill in the new numbers
-$("#rupee").empty();
-rupeePoint = getRupeeValues();
-
-
-}
-
-function startGame() {
-  showWins();
-  showLosses();
-}
-
-
-startGame();
-
-  
-
-})
+  function resetVariables() {
+    counter = 0;
+    $("#counter").text(counter);
+    $("#rupee").empty();
+    rupeePoint = getRupeeValues();
+    $("#targetNumber").empty();
+    targetNumber = [];
+    $("#targetNumber").text(targetNumber);
+    randVal();
+    targetNumber = randVal();
 
 
 
 
+
+  }
+
+  function startGame() {
+    showWins();
+    showLosses();
+  }
+
+
+  startGame();
+});
